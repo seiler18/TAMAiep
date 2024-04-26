@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AplicacionPrueba</string>
+    <string name="ingrese_email">Ingrese Email</string>
 </resources>
