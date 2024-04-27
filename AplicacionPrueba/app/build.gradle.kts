@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+
     namespace = "cl.jesusseiler.aplicacionprueba"
     compileSdk = 34
 
