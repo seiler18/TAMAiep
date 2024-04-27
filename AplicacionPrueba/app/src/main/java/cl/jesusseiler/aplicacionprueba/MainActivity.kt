@@ -64,6 +64,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    //Función para mostrar un mensaje de error si no se completan los campos
+    //Debo trabajar en esta para cuando no se complete el campo de email o password
+    //Muestre un mensaje de error - No implementada en esta versión
     private fun showAlert() {
         val builder = AlertDialog.Builder(this@MainActivity)
         builder.setTitle("Error")
@@ -73,6 +76,7 @@ class MainActivity : ComponentActivity() {
         dialog.show()
     }
 
+    //Función para mostrar la ventana HomeActivity si el login es exitoso
     private fun showHome(email: String, provider: ProviderType) {
         val homeIntent = Intent(this, HomeActivity::class.java).apply {
             putExtra("email", email)
@@ -80,5 +84,6 @@ class MainActivity : ComponentActivity() {
         }
         startActivity(homeIntent)
     }
+
 }
 
