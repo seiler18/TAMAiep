@@ -3,21 +3,15 @@ Repositorio de Jesus Seiler :rocket:
 #Taller de aplicaciones moviles en el AIEP
 
 ##TAMAiep
-- Tenemos 2 proyectos : El primero se llama "Radianes" que es la introducción a este mundo de las aplicaciones moviles, y el segundo se llama "AplicacionPrueba" para realizar los que no piden:
-- Para esta 5ta Semana, nos piden desarrollar una aplicación con los siguientes lineamientos : 
+En la era digital actual, la tecnología móvil ha transformado la forma en que interactuamos con el mundo que nos rodea, incluida la manera en que compramos y consumimos alimentos. En este contexto, surge la necesidad de adaptar los servicios de distribución de alimentos a las demandas y expectativas de los clientes modernos. La empresa de distribución de alimentos que se aborda en este proyecto se encuentra en la encrucijada de esta transformación, y busca desarrollar una aplicación móvil que no solo simplifique el proceso de compra para sus clientes, sino que también garantice la calidad y frescura de sus productos, especialmente para aquellos sensibles al frío. Este proyecto se propone diseñar un modelo de negocio y un prototipo no funcional de esta aplicación móvil, con el objetivo de ofrecer una solución integral que satisfaga las necesidades tanto de la empresa como de sus clientes.
 
-a) Crea una pantalla Login, y utilizando la autenticación de Firebase, utiliza el medio de 
-acceso por medio de correo electrónico y contraseña. Si el usuario y clave coinciden 
-con los registrados en Firebase Authentication, entonces abrirá una nueva pestaña, 
-llamado MenuActivity.  
+LINK AL PROYECTO :
 
-b) Si el usuario coincide con los datos, entonces almacena en RealTime Database, la 
-posición GPS de tu dispositivo. 
+https://github.com/users/seiler18/projects/3
 
-c) Configura dispositivo físico o virtual para instalación de la aplicación, e instala la 
-aplicación móvil en Android, comprobando que el método funciona correctamente. 
+LINK AL REPOSITORIO  : 
 
-d) Crea y gestiona este proyecto en un único repositorio de github, actualizando el 
-cumplimiento de las historias de usuario, incentivando el trabajo en equipo, y uso de 
-herramientas colaborativas.
+https://github.com/seiler18/TAMAiep
+
+
 
