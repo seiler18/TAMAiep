@@ -1,4 +1,4 @@
-Repositorio de Jesus Seiler :rocket:
+Repositorio de Jesus Seiler , Mauricio Morel, Jaime Llanca , Alejandro Gonzalez:rocket:
 
 #Taller de aplicaciones moviles en el AIEP
 
