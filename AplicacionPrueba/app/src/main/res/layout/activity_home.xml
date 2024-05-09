@@ -39,6 +39,39 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
+        <EditText
+            android:id="@+id/editTextTemperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ingrese temperatura °F"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <Button
+            android:id="@+id/buttonConvert"
+            android:layout_width="317dp"
+            android:layout_height="wrap_content"
+            android:text="Convertir a ° C" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/textViewResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado en celcius" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
