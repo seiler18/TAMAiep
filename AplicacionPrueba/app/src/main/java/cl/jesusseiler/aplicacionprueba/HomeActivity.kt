@@ -1,5 +1,6 @@
 package cl.jesusseiler.aplicacionprueba
 
+
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
@@ -12,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Vibrator
 import android.widget.Button
@@ -43,6 +45,14 @@ class HomeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        // Verifica y solicita permisos antes de obtener la ubicación
+        if (checkLocationPermission()) {
+            getLastKnownLocation()
+        } else {
+            requestLocationPermission()
+        }
+
+
         // Iniciar la obtención de la última ubicación conocida
         getLastKnownLocation()
 
@@ -58,10 +68,47 @@ class HomeActivity : ComponentActivity() {
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
         start(email ?: "", provider ?: "")
+
+        val buttonShowMap = findViewById<Button>(R.id.buttonShowMap)
+        buttonShowMap.setOnClickListener {
+            // Obtener la última ubicación conocida
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    location?.let {
+                        val intent = Intent(this, MapActivity::class.java)
+                        intent.putExtra("latitude", it.latitude)
+                        intent.putExtra("longitude", it.longitude)
+                        startActivity(intent)
+                    }
+                }
+        }
+
     }
 
+
+    //Sobreescribir el método onRequestPermissionsResult
+    private fun checkLocationPermission(): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            this, Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            this, Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+//Sobreescribir el método onRequestPermissionsResult
+    private fun requestLocationPermission() {
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+            LOCATION_PERMISSION_REQUEST_CODE
+        )
+    }
+
+
     private fun convertirYCompararTemperatura() {
+        // Obtener la temperatura en Fahrenheit
         val temperaturaFahrenheit = editTextTemperature.text.toString().toDoubleOrNull()
+        // Patrón de vibración
         val pattern = longArrayOf(0, 100, 1000, 300, 200, 100, 500, 200, 100)
 
         if (temperaturaFahrenheit != null) {
@@ -115,35 +162,39 @@ class HomeActivity : ComponentActivity() {
     }
 
 
-    //Función para obtener la última ubicación conocida
     @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     private fun getLastKnownLocation() {
-        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // Si los permisos de ubicación no están concedidos, solicitarlos.
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
+        if (!checkLocationPermission()) {
+            requestLocationPermission()
             return
         }
 
-        // Obtener la última ubicación conocida.
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
-                // Guardar la ubicación en Firebase si se obtiene con éxito.
                 location?.let { saveLocationToFirebase(it) }
             }
     }
+
+    @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    private fun getLastKnownLocationAndOpenMap() {
+        if (!checkLocationPermission()) {
+            requestLocationPermission()
+            return
+        }
+
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                location?.let {
+                    val intent = Intent(this, MapActivity::class.java)
+                    intent.putExtra("latitude", it.latitude)
+                    intent.putExtra("longitude", it.longitude)
+                    startActivity(intent)
+                }
+            }
+    }
+
 
 
     //Función para guardar la ubicación en Firebase

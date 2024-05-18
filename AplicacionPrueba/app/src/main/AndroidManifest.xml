@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="cl.jesusseiler.aplicacionprueba">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,9 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicacionPrueba"
         tools:targetApi="31">
+
+        <!-- API Key-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAWMy1XNObAptQ5NyfpRTf1RQCc5OaHjOw"/>
+
+        <!-- Activities -->
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,9 +37,13 @@
             android:theme="@style/Theme.AplicacionPrueba">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+
     </application>
 </manifest>
